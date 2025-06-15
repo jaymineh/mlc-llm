@@ -75,6 +75,8 @@ COPY --chown=mlcuser:mlcuser . .
 # Make conda available
 ENV PATH="/opt/conda/bin:$PATH"
 
+SHELL ["/bin/bash", "-c"]
+
 # Activate conda environment and build
 RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate mlc-chat-venv && \
