@@ -1,133 +1,247 @@
-<div align="center">
+# MLC-LLM DevOps Solution
 
-# MLC LLM
+[![CI/CD Pipeline](https://github.com/your-org/mlc-llm/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/your-org/mlc-llm/actions/workflows/ci-cd.yml)
+[![Docker Image](https://ghcr.io/your-org/mlc-llm:latest)](https://ghcr.io/your-org/mlc-llm)
 
-[![Installation](https://img.shields.io/badge/docs-latest-green)](https://llm.mlc.ai/docs/)
-[![License](https://img.shields.io/badge/license-apache_2-blue)](https://github.com/mlc-ai/mlc-llm/blob/main/LICENSE)
-[![Join Discoard](https://img.shields.io/badge/Join-Discord-7289DA?logo=discord&logoColor=white)](https://discord.gg/9Xpy2HGBuD)
-[![Related Repository: WebLLM](https://img.shields.io/badge/Related_Repo-WebLLM-fafbfc?logo=github)](https://github.com/mlc-ai/web-llm/)
+Production-quality DevOps workflow for [MLC-LLM](https://github.com/mlc-ai/mlc-llm) with automated testing, cross-platform builds, and container orchestration.
 
-**Universal LLM Deployment Engine with ML Compilation**
+## 🚀 Quick Start
 
-[Get Started](https://llm.mlc.ai/docs/get_started/quick_start) | [Documentation](https://llm.mlc.ai/docs) | [Blog](https://blog.mlc.ai/)
+### Prerequisites
 
-</div>
+- Docker 20.10+
+- Git with LFS support
+- GitHub account with GHCR access
 
-## About
+### Using Docker (Recommended)
 
-MLC LLM is a machine learning compiler and high-performance deployment engine for large language models.  The mission of this project is to enable everyone to develop, optimize, and deploy AI models natively on everyone's platforms. 
+```bash
+# Pull the latest image
+docker pull ghcr.io/your-org/mlc-llm:latest
 
-<div align="center">
-<table style="width:100%">
-  <thead>
-    <tr>
-      <th style="width:15%"> </th>
-      <th style="width:20%">AMD GPU</th>
-      <th style="width:20%">NVIDIA GPU</th>
-      <th style="width:20%">Apple GPU</th>
-      <th style="width:24%">Intel GPU</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Linux / Win</td>
-      <td>✅ Vulkan, ROCm</td>
-      <td>✅ Vulkan, CUDA</td>
-      <td>N/A</td>
-      <td>✅ Vulkan</td>
-    </tr>
-    <tr>
-      <td>macOS</td>
-      <td>✅ Metal (dGPU)</td>
-      <td>N/A</td>
-      <td>✅ Metal</td>
-      <td>✅ Metal (iGPU)</td>
-    </tr>
-    <tr>
-      <td>Web Browser</td>
-      <td colspan=4>✅ WebGPU and WASM </td>
-    </tr>
-    <tr>
-      <td>iOS / iPadOS</td>
-      <td colspan=4>✅ Metal on Apple A-series GPU</td>
-    </tr>
-    <tr>
-      <td>Android</td>
-      <td colspan=2>✅ OpenCL on Adreno GPU</td>
-      <td colspan=2>✅ OpenCL on Mali GPU</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+# Run in development mode
+docker run -it --rm -v $(pwd):/workspace ghcr.io/your-org/mlc-llm:dev
 
-MLC LLM compiles and runs code on MLCEngine -- a unified high-performance LLM inference engine across the above platforms. MLCEngine provides OpenAI-compatible API available through REST server, python, javascript, iOS, Android, all backed by the same engine and compiler that we keep improving with the community.
-
-## Get Started
-
-Please visit our [documentation](https://llm.mlc.ai/docs/) to get started with MLC LLM.
-- [Installation](https://llm.mlc.ai/docs/install/mlc_llm)
-- [Quick start](https://llm.mlc.ai/docs/get_started/quick_start)
-- [Introduction](https://llm.mlc.ai/docs/get_started/introduction)
-
-## Citation
-
-Please consider citing our project if you find it useful:
-
-```bibtex
-@software{mlc-llm,
-    author = {{MLC team}},
-    title = {{MLC-LLM}},
-    url = {https://github.com/mlc-ai/mlc-llm},
-    year = {2023-2025}
-}
+# Run in production mode
+docker run --rm ghcr.io/your-org/mlc-llm:latest chat --help
 ```
 
-The underlying techniques of MLC LLM include:
+### Local Development
 
-<details>
-  <summary>References (Click to expand)</summary>
+```bash
+# Clone repository
+git clone --recursive https://github.com/your-org/mlc-llm.git
+cd mlc-llm
 
-  ```bibtex
-  @inproceedings{tensorir,
-      author = {Feng, Siyuan and Hou, Bohan and Jin, Hongyi and Lin, Wuwei and Shao, Junru and Lai, Ruihang and Ye, Zihao and Zheng, Lianmin and Yu, Cody Hao and Yu, Yong and Chen, Tianqi},
-      title = {TensorIR: An Abstraction for Automatic Tensorized Program Optimization},
-      year = {2023},
-      isbn = {9781450399166},
-      publisher = {Association for Computing Machinery},
-      address = {New York, NY, USA},
-      url = {https://doi.org/10.1145/3575693.3576933},
-      doi = {10.1145/3575693.3576933},
-      booktitle = {Proceedings of the 28th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 2},
-      pages = {804–817},
-      numpages = {14},
-      keywords = {Tensor Computation, Machine Learning Compiler, Deep Neural Network},
-      location = {Vancouver, BC, Canada},
-      series = {ASPLOS 2023}
-  }
+# Build Docker image
+docker build -t mlc-llm:local .
 
-  @inproceedings{metaschedule,
-      author = {Shao, Junru and Zhou, Xiyou and Feng, Siyuan and Hou, Bohan and Lai, Ruihang and Jin, Hongyi and Lin, Wuwei and Masuda, Masahiro and Yu, Cody Hao and Chen, Tianqi},
-      booktitle = {Advances in Neural Information Processing Systems},
-      editor = {S. Koyejo and S. Mohamed and A. Agarwal and D. Belgrave and K. Cho and A. Oh},
-      pages = {35783--35796},
-      publisher = {Curran Associates, Inc.},
-      title = {Tensor Program Optimization with Probabilistic Programs},
-      url = {https://proceedings.neurips.cc/paper_files/paper/2022/file/e894eafae43e68b4c8dfdacf742bcbf3-Paper-Conference.pdf},
-      volume = {35},
-      year = {2022}
-  }
+# Run tests
+docker run --rm -v $(pwd):/workspace mlc-llm:local python -m pytest
+```
 
-  @inproceedings{tvm,
-      author = {Tianqi Chen and Thierry Moreau and Ziheng Jiang and Lianmin Zheng and Eddie Yan and Haichen Shen and Meghan Cowan and Leyuan Wang and Yuwei Hu and Luis Ceze and Carlos Guestrin and Arvind Krishnamurthy},
-      title = {{TVM}: An Automated {End-to-End} Optimizing Compiler for Deep Learning},
-      booktitle = {13th USENIX Symposium on Operating Systems Design and Implementation (OSDI 18)},
-      year = {2018},
-      isbn = {978-1-939133-08-3},
-      address = {Carlsbad, CA},
-      pages = {578--594},
-      url = {https://www.usenix.org/conference/osdi18/presentation/chen},
-      publisher = {USENIX Association},
-      month = oct,
-  }
-  ```
-</details>
+## 🏗️ Architecture
+
+### Docker Multi-Stage Build
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Base Image    │───▶│  Development    │    │     Builder     │
+│   Dependencies  │    │   Environment   │    │   Environment   │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                                                        │
+                                               ┌─────────────────┐
+                                               │     Runtime     │
+                                               │   Environment   │
+                                               └─────────────────┘
+```
+
+### CI/CD Pipeline Flow
+
+```
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│    Test     │───▶│Docker Build │───▶│Cross-Platform│───▶│   Release   │
+│   Stage     │    │   & Push    │    │    Build    │    │  Creation   │
+└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
+       │                    │                    │                │
+   ┌────▼────┐          ┌───▼───┐           ┌────▼────┐      ┌────▼────┐
+   │ Lint    │          │ GHCR  │           │ Linux   │      │ GitHub  │
+   │ Format  │          │ Push  │           │ Windows │      │Release  │
+   │ Test    │          │       │           │ Builds  │      │         │
+   └─────────┘          └───────┘           └─────────┘      └─────────┘
+```
+
+## 🐳 Docker Usage
+
+### Development Environment
+
+The Docker image serves dual purposes:
+
+**Interactive Development:**
+```bash
+docker run -it --rm \
+  -v $(pwd):/workspace \
+  -w /workspace \
+  mlc-llm:dev bash
+```
+
+**Build Environment:**
+```bash
+docker run --rm \
+  -v $(pwd):/workspace \
+  -w /workspace \
+  mlc-llm:runtime \
+  python -m mlc_llm compile --help
+```
+
+### Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `MLC_LLM_SOURCE_DIR` | Source directory path | `/app` |
+| `PYTHONPATH` | Python module search path | `/app/python:$PYTHONPATH` |
+
+## 🔧 Development Workflow
+
+### 1. Local Development Setup
+
+```bash
+# Create development environment
+docker run -it --rm \
+  -v $(pwd):/workspace \
+  -p 8888:8888 \
+  mlc-llm:dev
+
+# Inside container
+conda activate mlc-chat-venv
+jupyter lab --ip=0.0.0.0 --allow-root
+```
+
+### 2. Running Tests
+
+```bash
+# Unit tests
+pytest tests/ -v
+
+# Integration tests
+pytest tests/ -m integration
+
+# Docker tests
+pytest tests/ -m docker
+```
+
+### 3. Building from Source
+
+```bash
+# Configure build
+mkdir -p build && cd build
+python ../cmake/gen_cmake_config.py
+
+# Build
+cmake ..
+cmake --build . --parallel $(nproc)
+```
+
+## 🚀 CI/CD Pipeline
+
+### Triggers
+
+- **Push to main/develop**: Full pipeline
+- **Pull Request**: Test and build
+- **Release**: Full pipeline + deployment
+
+### Jobs Overview
+
+1. **Test Job**: Linting, formatting, unit tests
+2. **Docker Build**: Multi-arch container build
+3. **Cross-Platform Build**: Linux/Windows wheels
+4. **Release**: GitHub release creation
+
+### Secrets Required
+
+| Secret | Description |
+|--------|-------------|
+| `GITHUB_TOKEN` | Automatic GitHub token for GHCR |
+
+## 📦 Releases
+
+Releases are automatically created when:
+- A new tag is pushed matching `v*.*.*` pattern
+- GitHub release is published
+
+### Artifacts
+
+- Python wheels for Linux x64
+- Python wheels for Windows x64  
+- Docker images in GHCR
+
+## 🛠️ Build Dependencies
+
+### System Requirements
+
+- CMake >= 3.24
+- Git with LFS
+- Rust and Cargo
+- Python 3.9-3.11
+- C++ compiler with C++17 support
+
+### GPU Support
+
+| Platform | Runtime | Requirements |
+|----------|---------|--------------|
+| NVIDIA | CUDA >= 11.8 | CUDA Toolkit |
+| AMD | ROCm | ROCm Toolkit |
+| Apple | Metal | macOS 10.15+ |
+| Intel | Vulkan | Vulkan drivers |
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Docker build fails:**
+```bash
+# Check Docker daemon
+docker info
+
+# Clean build cache
+docker builder prune
+
+# Build with verbose output
+docker build --progress=plain .
+```
+
+**Tests fail:**
+```bash
+# Run specific test
+pytest tests/test_mlc_llm.py::TestMLCLLM::test_import_mlc_llm -v
+
+# Skip integration tests
+pytest -m "not integration"
+```
+
+**Import errors:**
+```bash
+# Check Python path
+echo $PYTHONPATH
+
+# Verify installation
+python -c "import mlc_llm; print(mlc_llm.__file__)"
+```
+
+## 📚 Additional Resources
+
+- [MLC-LLM Documentation](https://llm.mlc.ai/docs/)
+- [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
+- [Docker Best Practices](https://docs.docker.com/develop/dev-best-practices/)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
+
+## 📄 License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
