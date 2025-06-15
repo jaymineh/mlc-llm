@@ -1,7 +1,7 @@
 # MLC-LLM DevOps Solution
 
-[![CI/CD Pipeline](https://github.com/your-org/mlc-llm/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/your-org/mlc-llm/actions/workflows/ci-cd.yml)
-[![Docker Image](https://ghcr.io/your-org/mlc-llm:latest)](https://ghcr.io/your-org/mlc-llm)
+[![CI/CD Pipeline](https://github.com/jaymineh/mlc-llm/actions/workflows/pipeline.yml/badge.svg)](https://github.com/jaymineh/mlc-llm/actions/workflows/pipeline.yml)
+[![Docker Image](https://ghcr.io/jaymineh/mlc-llm:latest)](https://ghcr.io/jaymineh/mlc-llm)
 
 Production-quality DevOps workflow for [MLC-LLM](https://github.com/mlc-ai/mlc-llm) with automated testing, cross-platform builds, and container orchestration.
 
