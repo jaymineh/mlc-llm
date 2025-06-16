@@ -84,7 +84,7 @@ CMD ["bash"]
 RUN source /opt/conda/etc/profile.d/conda.sh && \
     conda activate mlc-chat-venv && \
     mkdir -p build && cd build && \
-    python -m pip install --pre -U -f https://mlc.ai/wheels mlc-ai-nightly-cpu \
+    python -m pip install --pre -U -f https://mlc.ai/wheels mlc-ai-nightly-cpu && \
     python ../cmake/gen_cmake_config.py && \
     cmake .. && \
     cmake --build . --parallel $(nproc)
