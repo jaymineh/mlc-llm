@@ -65,6 +65,7 @@ FROM base AS builder
 
 # Set working directory
 WORKDIR /build
+RUN chown -R mlcuser:mlcuser /build
 
 # Switch to non-root user
 USER mlcuser
